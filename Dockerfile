@@ -3,9 +3,9 @@ ARG PHP_VERSION=8.3
 FROM php:${PHP_VERSION}-apache
 
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev unzip \
+	&& apt-get install -y --no-install-recommends libcurl4-openssl-dev libfreetype6-dev libjpeg62-turbo-dev libonig-dev libpng-dev unzip \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
-	&& docker-php-ext-install gd mbstring pdo_mysql \
+	&& docker-php-ext-install curl gd mbstring pdo_mysql \
 	&& a2enmod rewrite headers \
 	&& rm -rf /var/lib/apt/lists/*
 
